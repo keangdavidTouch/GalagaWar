@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4BB7590D-3CD1-4AAC-AC8F-DB0534E11B4F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OverlordProject</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\OverlordEngine\OverlordEngine.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\OverlordEngine\OverlordEngine.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\Build\$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\Build\$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)OverlordEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+      <Profile>
+      </Profile>
+      <IgnoreSpecificDefaultLibraries>libcpmtd.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(OV_LIBS)PhysX\bin\Debug\*" "$(OutDir)" /y /D
+xcopy "$(OV_LIBS)Fmod\bin\*" "$(OutDir)" /y /D</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../OverlordEngine/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(OV_LIBS)PhysX\bin\Release\*" "$(OutDir)" /y /D
+xcopy "$(OV_LIBS)Fmod\bin\*" "$(OutDir)" /y /D</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GalagaWar\Prefabs\CoinPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Paths\BezierPath.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\AsteroidPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\BulletPrefab.cpp" />
+    <ClCompile Include="GalagaWar\GalagaWarScene.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\EnemyPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Managers\StateManager.cpp" />
+    <ClCompile Include="GalagaWar\UI\IntroUIObject.cpp" />
+    <ClCompile Include="GalagaWar\GalagaCamera.cpp" />
+    <ClCompile Include="Materials\ColorMaterial.cpp" />
+    <ClCompile Include="Materials\DiffuseMaterial.cpp" />
+    <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
+    <ClCompile Include="Materials\Shadow\SkinnedDiffuseMaterial_Shadow.cpp" />
+    <ClCompile Include="Materials\SkinnedDiffuseMaterial.cpp" />
+    <ClCompile Include="Materials\SpikeyMaterial.cpp" />
+    <ClCompile Include="Materials\UberMaterial.cpp" />
+    <ClCompile Include="Materials\SkyBoxMaterial.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\SpaceShipPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Components\SpaceShipComponent.cpp" />
+    <ClCompile Include="GalagaWar\PostProcessing\PostColorGrading.cpp" />
+    <ClCompile Include="GalagaWar\UI\SettingsUIObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\PauseUIObject.cpp" />
+    <ClCompile Include="GalagaWar\Sound\SoundObject.cpp" />
+    <ClCompile Include="GalagaWar\Managers\PickupManager.cpp" />
+    <ClCompile Include="GalagaWar\UI\PickupUIObject.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\RainParticleObject.cpp" />
+    <ClCompile Include="GalagaWar\Paths\PathHelper.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GalagaWar\UI\TextObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\UIObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OverlordEngine\OverlordEngine.vcxproj">
+      <Project>{634cfe8d-455c-45bf-94f0-bd0aab13e0e6}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GalagaWar\Prefabs\CoinPrefab.h" />
+    <ClInclude Include="GalagaWar\Paths\BezierPath.h" />
+    <ClInclude Include="GalagaWar\Prefabs\AsteroidPrefab.h" />
+    <ClInclude Include="GalagaWar\Prefabs\BulletPrefab.h" />
+    <ClInclude Include="GalagaWar\GalagaWarScene.h" />
+    <ClInclude Include="GalagaWar\Prefabs\EnemyPrefab.h" />
+    <ClInclude Include="GalagaWar\Managers\StateManager.h" />
+    <ClInclude Include="GalagaWar\UI\IntroUIObject.h" />
+    <ClInclude Include="GalagaWar\GalagaCamera.h" />
+    <ClInclude Include="Materials\ColorMaterial.h" />
+    <ClInclude Include="Materials\DiffuseMaterial.h" />
+    <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
+    <ClInclude Include="Materials\Shadow\SkinnedDiffuseMaterial_Shadow.h" />
+    <ClInclude Include="Materials\SkinnedDiffuseMaterial.h" />
+    <ClInclude Include="Materials\SpikeyMaterial.h" />
+    <ClInclude Include="Materials\UberMaterial.h" />
+    <ClInclude Include="Materials\SkyBoxMaterial.h" />
+    <ClInclude Include="GalagaWar\Prefabs\SpaceShipPrefab.h" />
+    <ClInclude Include="GalagaWar\Components\SpaceShipComponent.h" />
+    <ClInclude Include="GalagaWar\PostProcessing\PostColorGrading.h" />
+    <ClInclude Include="GalagaWar\UI\SettingsUIObject.h" />
+    <ClInclude Include="GalagaWar\UI\PauseUIObject.h" />
+    <ClInclude Include="GalagaWar\Sound\SoundObject.h" />
+    <ClInclude Include="GalagaWar\Managers\PickupManager.h" />
+    <ClInclude Include="GalagaWar\UI\PickupUIObject.h" />
+    <ClInclude Include="GalagaWar\Prefabs\RainParticleObject.h" />
+    <ClInclude Include="GalagaWar\Paths\PathHelper.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="MainGame.h" />
+    <ClInclude Include="GalagaWar\UI\TextObject.h" />
+    <ClInclude Include="GalagaWar\UI\UIObject.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

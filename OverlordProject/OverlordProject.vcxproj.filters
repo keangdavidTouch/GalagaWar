@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Materials\ColorMaterial.cpp" />
+    <ClCompile Include="Materials\DiffuseMaterial.cpp" />
+    <ClCompile Include="Materials\SpikeyMaterial.cpp" />
+    <ClCompile Include="Materials\UberMaterial.cpp" />
+    <ClCompile Include="Materials\SkinnedDiffuseMaterial.cpp" />
+    <ClCompile Include="Materials\Shadow\DiffuseMaterial_Shadow.cpp" />
+    <ClCompile Include="Materials\Shadow\SkinnedDiffuseMaterial_Shadow.cpp" />
+    <ClCompile Include="Materials\SkyBoxMaterial.cpp" />
+    <ClCompile Include="GalagaWar\Components\SpaceShipComponent.cpp" />
+    <ClCompile Include="GalagaWar\Managers\PickupManager.cpp" />
+    <ClCompile Include="GalagaWar\Paths\BezierPath.cpp" />
+    <ClCompile Include="GalagaWar\PostProcessing\PostColorGrading.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\AsteroidPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\BulletPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\CoinPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\EnemyPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\RainParticleObject.cpp" />
+    <ClCompile Include="GalagaWar\Prefabs\SpaceShipPrefab.cpp" />
+    <ClCompile Include="GalagaWar\Sound\SoundObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\IntroUIObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\PauseUIObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\PickupUIObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\SettingsUIObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\TextObject.cpp" />
+    <ClCompile Include="GalagaWar\UI\UIObject.cpp" />
+    <ClCompile Include="GalagaWar\GalagaCamera.cpp" />
+    <ClCompile Include="GalagaWar\GalagaWarScene.cpp" />
+    <ClCompile Include="GalagaWar\Paths\PathHelper.cpp" />
+    <ClCompile Include="GalagaWar\Managers\StateManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainGame.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Materials\ColorMaterial.h" />
+    <ClInclude Include="Materials\DiffuseMaterial.h" />
+    <ClInclude Include="Materials\SpikeyMaterial.h" />
+    <ClInclude Include="Materials\UberMaterial.h" />
+    <ClInclude Include="Materials\SkinnedDiffuseMaterial.h" />
+    <ClInclude Include="Materials\Shadow\DiffuseMaterial_Shadow.h" />
+    <ClInclude Include="Materials\Shadow\SkinnedDiffuseMaterial_Shadow.h" />
+    <ClInclude Include="Materials\SkyBoxMaterial.h" />
+    <ClInclude Include="GalagaWar\Components\SpaceShipComponent.h" />
+    <ClInclude Include="GalagaWar\Managers\PickupManager.h" />
+    <ClInclude Include="GalagaWar\Paths\BezierPath.h" />
+    <ClInclude Include="GalagaWar\PostProcessing\PostColorGrading.h" />
+    <ClInclude Include="GalagaWar\Prefabs\AsteroidPrefab.h" />
+    <ClInclude Include="GalagaWar\Prefabs\BulletPrefab.h" />
+    <ClInclude Include="GalagaWar\Prefabs\CoinPrefab.h" />
+    <ClInclude Include="GalagaWar\Prefabs\EnemyPrefab.h" />
+    <ClInclude Include="GalagaWar\Prefabs\RainParticleObject.h" />
+    <ClInclude Include="GalagaWar\Prefabs\SpaceShipPrefab.h" />
+    <ClInclude Include="GalagaWar\Sound\SoundObject.h" />
+    <ClInclude Include="GalagaWar\UI\IntroUIObject.h" />
+    <ClInclude Include="GalagaWar\UI\PauseUIObject.h" />
+    <ClInclude Include="GalagaWar\UI\PickupUIObject.h" />
+    <ClInclude Include="GalagaWar\UI\SettingsUIObject.h" />
+    <ClInclude Include="GalagaWar\UI\TextObject.h" />
+    <ClInclude Include="GalagaWar\UI\UIObject.h" />
+    <ClInclude Include="GalagaWar\GalagaCamera.h" />
+    <ClInclude Include="GalagaWar\GalagaWarScene.h" />
+    <ClInclude Include="GalagaWar\Paths\PathHelper.h" />
+    <ClInclude Include="GalagaWar\Managers\StateManager.h" />
+  </ItemGroup>
+</Project>
