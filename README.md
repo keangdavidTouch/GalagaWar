@@ -1,7 +1,7 @@
 # GalagaWar
 This game made with DirectX and PhysX using custom base engine that provided by school but I implemented most of the functionalities and components.
 <br><br>
-Click link below to see how I implement this game:
+Click the link below to see how I implement this game:
 <br>
 https://github.com/keangdavidTouch/GalagaWar/tree/master/OverlordProject/GalagaWar
 
