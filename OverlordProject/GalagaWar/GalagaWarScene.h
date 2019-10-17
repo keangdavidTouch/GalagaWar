@@ -41,12 +41,8 @@ private:
 	std::vector<EnemyPrefab*> m_LeadEnemies{};
 	//UIs
 	SpriteFont* m_pFont;
-	/*UIObject* m_SettingsUI = nullptr;
-	UIObject* m_PauseUI = nullptr;
-	UIObject* m_StartUI = nullptr;
-	UIObject* m_PickupUI = nullptr;*/
-	
 	std::map<std::string, UIObject*> m_UIObjects;
+	std::function<void()> m_ResetGameCallback;
 
 	//----------------- FUNCTIONS ----------------
 	void AddEnemies();
@@ -67,6 +63,6 @@ private:
 	void HandleInputTrigger();
 
 	void StartGame();
-	void ResetGame();
+	void AddResetGameCallback();
 };
 

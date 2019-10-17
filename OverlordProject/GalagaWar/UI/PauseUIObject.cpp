@@ -63,8 +63,6 @@ void PauseUIObject::Initialize(const GameContext & /*gameContext*/)
 	UpdateText();
 }
 
-void PauseUIObject::PostInitialize(const GameContext &){}
-
 void PauseUIObject::Update(const GameContext & context)
 {
 	// Update in Pause-State Only

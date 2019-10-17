@@ -3,10 +3,6 @@
 #include "PickupManager.h"
 #include "TransformComponent.h"
 
-void PickupManager::Update(const GameContext &)
-{
-}
-
 void PickupManager::SetCoinPickupCount(GameScene* scene, int count)
 {
 	for (int i = 0; i <= count; i++) {

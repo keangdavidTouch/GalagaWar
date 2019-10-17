@@ -20,8 +20,8 @@ public:
 	std::wstring& GetText() { return m_Text; };
 
 protected:
-	void Initialize(const GameContext& gameContext) override;
-	void Update(const GameContext& gameContext) override;
+	//void Initialize(const GameContext& gameContext) override;
+	//void Update(const GameContext& gameContext) override;
 	void Draw(const GameContext&) override;
 
 private:

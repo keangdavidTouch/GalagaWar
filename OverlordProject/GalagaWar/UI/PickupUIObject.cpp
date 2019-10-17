@@ -28,10 +28,6 @@ void PickupUIObject::Initialize(const GameContext & )
 	AddChild(starIcon);
 }
 
-void PickupUIObject::PostInitialize(const GameContext &)
-{
-}
-
 void PickupUIObject::Update(const GameContext & )
 {
 	// SCORE-TEXT

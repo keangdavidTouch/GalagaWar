@@ -74,10 +74,6 @@ void SettingUIObject::Initialize(const GameContext & /*gameContext*/)
 	m_Buttons.push_back(homeButton);
 }
 
-void SettingUIObject::PostInitialize(const GameContext &)
-{
-}
-
 void SettingUIObject::Update(const GameContext & gameContext)
 {
 	auto nrOfNumber = int(m_Buttons.size());

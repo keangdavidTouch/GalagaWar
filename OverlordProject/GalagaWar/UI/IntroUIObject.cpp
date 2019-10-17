@@ -56,10 +56,6 @@ void IntroUIObject::Initialize(const GameContext&)
 	//AddChild(playButton);
 }
 
-void IntroUIObject::PostInitialize(const GameContext &)
-{
-}
-
 void IntroUIObject::Update(const GameContext& gameContext)
 {
 	m_AnimatedElapsedSec += gameContext.pGameTime->GetElapsed() * m_Speed;

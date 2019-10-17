@@ -52,19 +52,9 @@ GalagaWarScene::~GalagaWarScene()
 	StateManager::DestroyInstance();
 	PickupManager::DestroyInstance();
 
-	//Delete UIObjects
-	/*if (m_PauseUI && !m_PauseUI->GetScene()) {
-		AddChild(m_PauseUI);
-	}
-	if (m_SettingsUI && !m_SettingsUI->GetScene()) {
-		AddChild(m_SettingsUI);
-	}
-	if (m_StartUI && !m_StartUI->GetScene()) {
-		AddChild(m_StartUI);
-	}*/
-
 	for(auto ui : m_UIObjects) {
-		if (!ui.second->GetScene()) {
+		if (ui.second) {
+			if(!ui.second->GetScene())
 			AddChild(ui.second);
 		}
 	}
@@ -88,6 +78,7 @@ void GalagaWarScene::Initialize()
 	AddSpaceShip();
 	AddChild(new RainParticleObject());
 	AddPostProcessingEffect(new PostColorGrading());
+	AddResetGameCallback();
 
 	PickupManager::GetInstance()->SetCoinPickupCount(this, 5);
 }
@@ -106,8 +97,7 @@ void GalagaWarScene::Draw()
 {
 }
 
-#pragma region
-// -------------- Enemy ------------------------
+#pragma region ENEMY
 void GalagaWarScene::AddLeadEnemy(EnemyPrefab* enemy, int followerNumber)
 {
 	m_LeadEnemies.push_back(enemy);
@@ -141,16 +131,16 @@ void GalagaWarScene::UpdateEnemyMovement()
 	
 	for (size_t i = 0; i < m_LeadEnemies.size(); i++)
 	{
-		//Change to new Path when every followers finish or dead
+		//Change to new Path when all followers finish or dead
 		if (m_LeadEnemies[i]->IsFinish() || m_LeadEnemies[i]->ShouldRestart())
 		{
 			SetEnemyPath(m_LeadEnemies[i]);
 		}
 	}
 }
-#pragma endregion ENEMY
+#pragma endregion 
 
-#pragma region
+#pragma region SCENE_GAMEOBJECTS
 void GalagaWarScene::AddSpaceShip()
 {
 	m_SpaceShip->GetTransform()->Translate(0,0,-200);
@@ -170,17 +160,12 @@ void GalagaWarScene::AddUI()
 {
 	m_pFont = ContentManager::Load<SpriteFont>(L"./Resources/SpriteFonts/SF TransRobotics_64.fnt");
 
-	m_UIObjects["StartUI"] = new IntroUIObject();
-	AddChild(m_UIObjects["StartUI"]);
-
-	m_UIObjects["PickupUI"] = new PickupUIObject(m_pFont);
-	AddChild(m_UIObjects["PickupUI"]);
-
-	/*m_StartUI = new IntroUIObject();
-	AddChild(m_StartUI);
-
-	m_PickupUI = new PickupUIObject(m_pFont);
-	AddChild(m_PickupUI);*/
+	auto startUI = new IntroUIObject();
+	auto pickupUI = new PickupUIObject(m_pFont);
+	m_UIObjects["StartUI"] = startUI;
+	m_UIObjects["PickupUI"] = pickupUI;
+	AddChild(startUI);
+	AddChild(pickupUI);
 }
 
 void GalagaWarScene::AddFixedCamera()
@@ -255,9 +240,9 @@ void GalagaWarScene::AddSceneProps()
 
 #pragma endregion Planets
 }
-#pragma endregion SCENE_GAMEOBJECTS
+#pragma endregion 
 
-#pragma region
+#pragma region UPDATE_GAMEOBJECTS
 void GalagaWarScene::UpdateSceneProps()
 {
 	const auto gameContext = GetGameContext();
@@ -270,21 +255,14 @@ void GalagaWarScene::UpdateDynamicUI()
 
 	if (gameContext.pInput->IsActionTriggered(16))
 	{
-		/*if (m_SettingsUI == nullptr) {
-			m_SettingsUI = new SettingUIObject(m_pFont);
-		}
+		const auto key = "SettingsUI";
+		auto settingUI = m_UIObjects[key];
 
-		if (m_SettingsUI->GetScene() == nullptr) {
-			AddChild(m_SettingsUI);
-		}*/
+		if (!settingUI) 
+			settingUI = m_UIObjects[key] = new SettingUIObject(m_pFont);
 
-		if (!m_UIObjects["SettingsUI"]) {
-			m_UIObjects["SettingsUI"] = new SettingUIObject(m_pFont);
-		}
-
-		if (m_UIObjects["SettingsUI"]->GetScene() == nullptr) {
-			AddChild(m_UIObjects["SettingsUI"]);
-		}
+		if (!m_UIObjects[key]->GetScene()) 
+			AddChild(m_UIObjects[key]);
 	}
 
 	auto stateManager = StateManager::GetInstance();
@@ -297,30 +275,19 @@ void GalagaWarScene::UpdateDynamicUI()
 		{
 			stateManager->SetState(State::Pause);
 
-			/*if (m_PauseUI == nullptr) {
+			const auto key = "PauseUI";
+			auto pauseUI = m_UIObjects[key];
 
-				std::function<void()> restartGameCallback = [&]() { this->ResetGame(); };
-				m_PauseUI = new PauseUIObject(m_pFont, restartGameCallback);
-			}
+			if (!pauseUI)
+				pauseUI = m_UIObjects[key] = new PauseUIObject(m_pFont, m_ResetGameCallback);
 
-			if (m_PauseUI->GetScene() == nullptr) {
-				AddChild(m_PauseUI);
-			}*/
-
-			if (!m_UIObjects["PauseUI"]) {
-
-				std::function<void()> restartGameCallback = [&]() { this->ResetGame(); };
-				m_UIObjects["PauseUI"] = new PauseUIObject(m_pFont, restartGameCallback);
-			}
-
-			if (m_UIObjects["PauseUI"]->GetScene() == nullptr) {
-				AddChild(m_UIObjects["PauseUI"]);
-			}
+			if (!pauseUI->GetScene())
+				AddChild(pauseUI);
 		}
 	}
 }
 
-#pragma endregion UPDATE_GAMEOBJECTS
+#pragma endregion 
 
 #pragma region GAMEPLAY
 
@@ -329,29 +296,30 @@ void GalagaWarScene::StartGame()
 	m_SoundObject.Play(1);
 	m_SpaceShip->GetTransform()->Translate(0, 0, -200);
 	m_SpaceShip->GetTransform()->Rotate(0, 180, 0);
-	//RemoveChild(m_StartUI, false);
 	RemoveChild(m_UIObjects["StartUI"], false);
 
-	auto animationCallback = []() {
+	auto animationFinishCallback = []() {
 		StateManager::GetInstance()->SetState(State::Playing);
 	};
 
-	m_GalagaCamera->Animate(animationCallback);
+	m_GalagaCamera->Animate(animationFinishCallback);
 }
 
-void GalagaWarScene::ResetGame()
+void GalagaWarScene::AddResetGameCallback()
 {
-	for (auto enemy : m_LeadEnemies)
-		SetEnemyPath(enemy);
+	m_ResetGameCallback = [&]() {
 
-	m_SoundObject.Play(0);
-	m_SpaceShip->Reset();
-	//AddChild(m_StartUI);
-	AddChild(m_UIObjects["StartUI"]);
+		for (auto enemy : m_LeadEnemies)
+			SetEnemyPath(enemy);
 
-	PickupManager::GetInstance()->ResetCoins();
-	StateManager::GetInstance()->SetState(State::Intro);
-	StateManager::GetInstance()->SetWinState(WinState::None);
+		m_SoundObject.Play(0);
+		m_SpaceShip->Reset();
+		AddChild(m_UIObjects["StartUI"]);
+
+		PickupManager::GetInstance()->ResetCoins();
+		StateManager::GetInstance()->SetState(State::Intro);
+		StateManager::GetInstance()->SetWinState(WinState::None);
+	};
 }
 #pragma endregion 
 

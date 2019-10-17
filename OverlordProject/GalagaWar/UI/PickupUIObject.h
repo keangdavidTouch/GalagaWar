@@ -14,7 +14,6 @@ public:
 
 protected:
 	void Initialize(const GameContext& gameContext) override;
-	void PostInitialize(const GameContext&) override;
 	void Update(const GameContext& gameContext) override;
 private:
 	TextObject* m_TextObject = nullptr;

@@ -9,12 +9,7 @@ TextObject::TextObject(SpriteFont* pFont, std::wstring text, DirectX::XMFLOAT2& 
 	m_Pos(pos),
 	m_Color(DirectX::XMFLOAT4(DirectX::Colors::White))
 {
-	
 }
-
-void TextObject::Initialize(const GameContext& ){}
-
-void TextObject::Update(const GameContext& ){}
 
 void TextObject::Draw(const GameContext & )
 {

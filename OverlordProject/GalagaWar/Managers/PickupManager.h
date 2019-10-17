@@ -13,7 +13,7 @@ public:
 	PickupManager() = default;
 	virtual ~PickupManager() = default;
 
-	void Update(const GameContext& context);
+	//void Update(const GameContext& context);
 	void IncrementCoin() { m_CollectedCoin += 1; };
 	int GetCollectedCoin() { return m_CollectedCoin; };
 	void SetCoinPickupCount(GameScene* scene, int count);
